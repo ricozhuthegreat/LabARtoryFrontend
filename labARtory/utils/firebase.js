@@ -1,9 +1,6 @@
 // firebase.js
 import Environment from "../config/environment";
-
 import * as firebase from "firebase";
-
-
 
 firebase.initializeApp({
 
@@ -17,7 +14,11 @@ firebase.initializeApp({
 
   storageBucket: Environment["FIREBASE_STORAGE_BUCKET"],
 
-  messagingSenderId: Environment["FIREBASE_MESSAGING_SENDER_ID"]
+  messagingSenderId: Environment["FIREBASE_MESSAGING_SENDER_ID"],
+
+  appId: Environment["FIREBASE_APPID"],
+
+  measurementId: Environment["FIREBASE_MEASUREMENTID"]
 
 });
 
