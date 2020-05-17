@@ -455,7 +455,7 @@ export default class App extends React.Component {
 
       let response = await fetch(
 
-        "https://adoring-hamilton-81fcfa.netlify.app/" +
+        "https://vision.googleapis.com/v1/images:annotate?key=" +
 
           Environment["GOOGLE_OPTICAL_CHARACTER_RECOGNITION_API_KEY"],
 
@@ -501,7 +501,7 @@ export default class App extends React.Component {
 
 function handleHelpPress() {
   WebBrowser.openBrowserAsync(
-    'https://docs.expo.io/versions/latest/get-started/create-a-new-app/#making-your-first-change'
+    'https://adoring-hamilton-81fcfa.netlify.app/' 
   );
 }
 
