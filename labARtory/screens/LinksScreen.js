@@ -455,7 +455,7 @@ export default class App extends React.Component {
 
       let response = await fetch(
 
-        "https://vision.googleapis.com/v1/images:annotate?key=" +
+        "https://adoring-hamilton-81fcfa.netlify.app/" +
 
           Environment["GOOGLE_OPTICAL_CHARACTER_RECOGNITION_API_KEY"],
 
