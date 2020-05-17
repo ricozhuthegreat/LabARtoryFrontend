@@ -19,6 +19,7 @@ import * as ImagePicker from 'expo-image-picker'
 import uuid from 'uuid';
 import Environment from "../config/environment";
 import firebase from "../utils/firebase";
+import * as WebBrowser from 'expo-web-browser';
 
 console.disableYellowBox = true;
 
@@ -26,7 +27,8 @@ export default class App extends React.Component {
   state = {
     image: null,
     uploading: false,
-    googleResponse: null
+    googleResponse: null,
+    analyze:true
   };
   
   async componentDidMount() {
@@ -105,7 +107,7 @@ export default class App extends React.Component {
               <FlatList
 
                 data={this.state.googleResponse.responses[0].textAnnotations}
-                renderItem={({ item}) => <Text
+                renderItem={({item, index}) => <Text
 
                 onPress={this._copyToClipboard}
       
@@ -113,7 +115,7 @@ export default class App extends React.Component {
       
                 style={{fontSize: 8 }}
       
-              > {item.description}</Text> }
+              > {item.description}</Text>}
 
               />
 
@@ -182,72 +184,132 @@ export default class App extends React.Component {
 
     }
 
-
-
-    return (
-
-      <View
-
-        style={{
-
-          marginTop: 20,
-
-          width: 250,
-
-          borderRadius: 3,
-
-          elevation: 2
-
-        }}
-
-      >
-
-        <Button
-
-          style={{ marginBottom: 10 }}
-
-          onPress={() => this.submitToGoogle()}
-
-          title="Analyze!"
-
-        />
-
-
+    if(this.state.analyze == true){
+      return (
 
         <View
-
+  
           style={{
-
-            borderTopRightRadius: 3,
-
-            borderTopLeftRadius: 3,
-
-            shadowColor: "rgba(0,0,0,1)",
-
-            shadowOpacity: 0.2,
-
-            shadowOffset: { width: 4, height: 4 },
-
-            shadowRadius: 5,
-
-            overflow: "hidden"
-
+  
+            marginTop: 20,
+  
+            width: 250,
+  
+            borderRadius: 3,
+  
+            elevation: 2
+  
           }}
-
+  
         >
-
-          <Image source={{ uri: image }} style={{ width: 250, height: 250 }} />
-
-        </View>
+  
+          <Button
+  
+            style={{ marginBottom: 10 }}
+  
+            onPress={() => this.submitToGoogle()}
+  
+            title="Analyze!"
+  
+          />
+  
         
+  
+          <View
+  
+            style={{
+  
+              borderTopRightRadius: 3,
+  
+              borderTopLeftRadius: 3,
+  
+              shadowColor: "rgba(0,0,0,1)",
+  
+              shadowOpacity: 0.2,
+  
+              shadowOffset: { width: 4, height: 4 },
+  
+              shadowRadius: 5,
+  
+              overflow: "hidden"
+  
+            }}
+  
+          >
+  
+            <Image source={{ uri: image }} style={{ width: 250, height: 250 }} />
+  
+        </View>
+          
+        
+  
+        </View>
+  
+      );
+      
+    }
+    else{
+      return (
 
-      </View>
-
-    );
+        <View
+  
+          style={{
+  
+            marginTop: 20,
+  
+            width: 250,
+  
+            borderRadius: 3,
+  
+            elevation: 2
+  
+          }}
+  
+        >
+  
+  <View  style={{alignItems: 'center'}}>
+          <TouchableOpacity onPress={handleHelpPress} style={styles.helpLink}>
+              <Text style={{fontSize: 30, color: "blue"}}>Visualize!</Text>
+          </TouchableOpacity>
+        </View>
+  
+        
+  
+          <View
+  
+            style={{
+  
+              borderTopRightRadius: 3,
+  
+              borderTopLeftRadius: 3,
+  
+              shadowColor: "rgba(0,0,0,1)",
+  
+              shadowOpacity: 0.2,
+  
+              shadowOffset: { width: 4, height: 4 },
+  
+              shadowRadius: 5,
+  
+              overflow: "hidden"
+  
+            }}
+  
+          >
+  
+            <Image source={{ uri: image }} style={{ width: 250, height: 250 }} />
+  
+        </View>
+  
+        </View>
+  
+      );
+    }
+    
 
   };
 
-
+  
 
   _keyExtractor = (item, index) => item.id;
 
@@ -300,7 +362,7 @@ export default class App extends React.Component {
 
 
     this._handleImagePicked(pickerResult);
-
+    this.state.analyze=true;
   };
 
 
@@ -318,7 +380,7 @@ export default class App extends React.Component {
 
 
     this._handleImagePicked(pickerResult);
-
+    this.state.analyze = true;
   };
 
 
@@ -422,7 +484,7 @@ export default class App extends React.Component {
       this.setState({
 
         googleResponse: responseJson,
-
+        analyze: false,
         uploading: false
 
       });
@@ -437,7 +499,11 @@ export default class App extends React.Component {
 
 }
 
-
+function handleHelpPress() {
+  WebBrowser.openBrowserAsync(
+    'https://docs.expo.io/versions/latest/get-started/create-a-new-app/#making-your-first-change'
+  );
+}
 
 async function uploadImageAsync(uri) {
 

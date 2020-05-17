@@ -2,52 +2,69 @@ import * as WebBrowser from 'expo-web-browser';
 import * as React from 'react';
 import { Image, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
+import { WebView } from 'react-native-webview';
+import {
+  RTCPeerConnection,
+  RTCIceCandidate,
+  RTCSessionDescription,
+  RTCView,
+  MediaStream,
+  MediaStreamTrack,
+  mediaDevices,
+  registerGlobals
+} from 'react-native-webrtc';
 
 import { MonoText } from '../components/StyledText';
 
 export default function HomeScreen() {
   return (
     <View style={styles.container}>
-      <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-        <View style={styles.welcomeContainer}>
-          <Image
-            source={
-              __DEV__
-                ? require('../assets/images/robot-dev.png')
-                : require('../assets/images/robot-prod.png')
-            }
-            style={styles.welcomeImage}
-          />
-        </View>
-
-        <View style={styles.getStartedContainer}>
-          <DevelopmentModeNotice />
-
-          <Text style={styles.getStartedText}>Open up the code for this screen:</Text>
-
-          <View style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
-            <MonoText>screens/HomeScreen.js</MonoText>
-          </View>
-
-          <Text style={styles.getStartedText}>
-            Change any of the text, save the file, and your app will automatically reload.
-          </Text>
-        </View>
-
-        <View style={styles.helpContainer}>
-          <TouchableOpacity onPress={handleHelpPress} style={styles.helpLink}>
+        <WebView
+          scalesPageToFit={true}
+          bounces={false}
+          javaScriptEnabled
+          style={{ height: 500, width: 300 }}
+          source={{
+            html: `=
+                  <!DOCTYPE html>
+                  <html>
+                    <head><title>Ebmedded AR.js Experience through echoAR</title>
+                    <style>
+                        #background {
+                            top: 0;
+                            left: 0;
+                            position: fixed;
+                            width: 100%;
+                            height: 100%;
+                            background-color: rgb(0, 45, 100);
+                            z-index: -1;
+                        }
+                        h1 {
+                            position: relative;
+                            color: white;
+                            text-align: center;
+                            font-size: 5vh;
+                            font-family: Arial, Helvetica, sans-serif;
+                        }
+                        iframe {
+                            position: relative;
+                            width: 100%;
+                            height: 75vh;
+                        }
+                    </style></head> // <--add header styles if needed
+                    <body>
+	                    <div id="background"></div>
+                      <h1>Ebmedded AR.js Experience through echoAR</h1>
+                      <iframe src="https://console.echoAR.xyz/arjs?key=purple-math-6579" allow="camera *"></iframe>
+                    </body>
+                  </html>
+            `,
+          }}
+          automaticallyAdjustContentInsets={false}
+        />
+        <TouchableOpacity onPress={handleHelpPress} style={styles.helpLink}>
             <Text style={styles.helpLinkText}>Help, it didn’t automatically reload!</Text>
-          </TouchableOpacity>
-        </View>
-      </ScrollView>
-
-      <View style={styles.tabBarInfoContainer}>
-        <Text style={styles.tabBarInfoText}>This is a tab bar. You can edit it in:</Text>
-
-        <View style={[styles.codeHighlightContainer, styles.navigationFilename]}>
-          <MonoText style={styles.codeHighlightText}>navigation/BottomTabNavigator.js</MonoText>
-        </View>
-      </View>
+        </TouchableOpacity>
     </View>
   );
 }
