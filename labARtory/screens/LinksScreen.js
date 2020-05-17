@@ -104,13 +104,16 @@ export default class App extends React.Component {
 
               <FlatList
 
-                data={this.state.googleResponse.responses[0].labelAnnotations}
+                data={this.state.googleResponse.responses[0].textAnnotations}
+                renderItem={({ item}) => <Text
 
-                extraData={this.state}
-
-                keyExtractor={this._keyExtractor}
-
-                renderItem={({ item }) => <Text>Item: {item.description}</Text>}
+                onPress={this._copyToClipboard}
+      
+                onLongPress={this._share}
+      
+                style={{fontSize: 8 }}
+      
+              > {item.description}</Text> }
 
               />
 
@@ -129,27 +132,6 @@ export default class App extends React.Component {
     );
 
   }
-
-
-
-  organize = array => {
-
-    return array.map(function(item, i) {
-
-      return (
-
-        <View key={i}>
-
-          <Text>{item}</Text>
-
-        </View>
-
-      );
-
-    });
-
-  };
-
 
 
   _maybeRenderUploadingOverlay = () => {
@@ -257,40 +239,7 @@ export default class App extends React.Component {
           <Image source={{ uri: image }} style={{ width: 250, height: 250 }} />
 
         </View>
-
-        <Text
-
-          onPress={this._copyToClipboard}
-
-          onLongPress={this._share}
-
-          style={{ paddingVertical: 10, paddingHorizontal: 10 }}
-
-        />
-
-
-
-        <Text>Raw JSON:</Text>
-
-
-
-        {googleResponse && (
-
-          <Text
-
-            onPress={this._copyToClipboard}
-
-            onLongPress={this._share}
-
-            style={{ paddingVertical: 10, paddingHorizontal: 10 }}
-
-          >
-
-            JSON.stringify(googleResponse.responses)}
-
-          </Text>
-
-        )}
+        
 
       </View>
 
@@ -421,27 +370,7 @@ export default class App extends React.Component {
           {
 
             features: [
-
-              { type: "LABEL_DETECTION", maxResults: 10 },
-
-              { type: "LANDMARK_DETECTION", maxResults: 5 },
-
-              { type: "FACE_DETECTION", maxResults: 5 },
-
-              { type: "LOGO_DETECTION", maxResults: 5 },
-
-              { type: "TEXT_DETECTION", maxResults: 5 },
-
-              { type: "DOCUMENT_TEXT_DETECTION", maxResults: 5 },
-
-              { type: "SAFE_SEARCH_DETECTION", maxResults: 5 },
-
-              { type: "IMAGE_PROPERTIES", maxResults: 5 },
-
-              { type: "CROP_HINTS", maxResults: 5 },
-
-              { type: "WEB_DETECTION", maxResults: 5 }
-
+              { type: "DOCUMENT_TEXT_DETECTION"},
             ],
 
             image: {
@@ -453,6 +382,8 @@ export default class App extends React.Component {
               }
 
             }
+
+
 
           }
 
