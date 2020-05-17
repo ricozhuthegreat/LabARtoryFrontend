@@ -19,51 +19,8 @@ import { MonoText } from '../components/StyledText';
 export default function HomeScreen() {
   return (
     <View style={styles.container}>
-        <WebView
-          scalesPageToFit={true}
-          bounces={false}
-          javaScriptEnabled
-          style={{ height: 500, width: 300 }}
-          source={{
-            html: `=
-                  <!DOCTYPE html>
-                  <html>
-                    <head><title>Ebmedded AR.js Experience through echoAR</title>
-                    <style>
-                        #background {
-                            top: 0;
-                            left: 0;
-                            position: fixed;
-                            width: 100%;
-                            height: 100%;
-                            background-color: rgb(0, 45, 100);
-                            z-index: -1;
-                        }
-                        h1 {
-                            position: relative;
-                            color: white;
-                            text-align: center;
-                            font-size: 5vh;
-                            font-family: Arial, Helvetica, sans-serif;
-                        }
-                        iframe {
-                            position: relative;
-                            width: 100%;
-                            height: 75vh;
-                        }
-                    </style></head> // <--add header styles if needed
-                    <body>
-	                    <div id="background"></div>
-                      <h1>Ebmedded AR.js Experience through echoAR</h1>
-                      <iframe src="https://console.echoAR.xyz/arjs?key=purple-math-6579" allow="camera *"></iframe>
-                    </body>
-                  </html>
-            `,
-          }}
-          automaticallyAdjustContentInsets={false}
-        />
         <TouchableOpacity onPress={handleHelpPress} style={styles.helpLink}>
-            <Text style={styles.helpLinkText}>Help, it didn’t automatically reload!</Text>
+            <Text style={styles.helpLinkText}>Get started with LabARtory</Text>
         </TouchableOpacity>
     </View>
   );
@@ -102,7 +59,7 @@ function handleLearnMorePress() {
 
 function handleHelpPress() {
   WebBrowser.openBrowserAsync(
-    'https://docs.expo.io/versions/latest/get-started/create-a-new-app/#making-your-first-change'
+    'https://google.cs'
   );
 }
 
@@ -190,7 +147,8 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
   },
   helpLinkText: {
+    alignItems: 'center',
     fontSize: 14,
-    color: '#2e78b7',
+    color: 'black',
   },
 });

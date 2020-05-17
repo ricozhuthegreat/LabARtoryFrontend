@@ -62,9 +62,9 @@ export default class App extends React.Component {
 
                 __DEV__
 
-                  ? require("../assets/images/robot-dev.png")
+                  ? require("../assets/images/LabARtory2.png")
 
-                  : require("../assets/images/robot-prod.png")
+                  : require("../assets/images/LabARtory2.png")
 
               }
 
@@ -74,33 +74,21 @@ export default class App extends React.Component {
 
           </View>
 
-
-
-          <View style={styles.getStartedContainer}>
-
-            {image ? null : (
-
-              <Text style={styles.getStartedText}>Google Optical Character Recognition</Text>
-
-            )}
-
-          </View>
-
-
-
           <View style={styles.helpContainer}>
 
-            <Button
+          <View  style={{alignItems: 'center'}}>
+          <TouchableOpacity onPress={this._pickImage} style={styles.helpLink}>
+              <Text style={styles.button}>Pick an Image from Camera Roll</Text>
+          </TouchableOpacity>
+          </View>
+          
+          <Text> </Text>
 
-              onPress={this._pickImage}
-
-              title="Pick an image from camera roll"
-
-            />
-
-
-
-            <Button onPress={this._takePhoto} title="Take a photo" />
+          <View  style={{alignItems: 'center'}}>
+          <TouchableOpacity onPress={this._takePhoto} style={styles.helpLink}>
+              <Text style={styles.button}>Take a Photo</Text>
+          </TouchableOpacity>
+          </View>
 
             {this.state.googleResponse && (
 
@@ -203,15 +191,11 @@ export default class App extends React.Component {
   
         >
   
-          <Button
-  
-            style={{ marginBottom: 10 }}
-  
-            onPress={() => this.submitToGoogle()}
-  
-            title="Analyze!"
-  
-          />
+  <View  style={{alignItems: 'center'}}>
+          <TouchableOpacity onPress={() => this.submitToGoogle()} style={styles.helpLink}>
+              <Text style={styles.button2}>... Analyze ... </Text>
+          </TouchableOpacity>
+  </View>
   
         
   
@@ -267,9 +251,9 @@ export default class App extends React.Component {
   
         >
   
-  <View  style={{alignItems: 'center'}}>
+        <View  style={{alignItems: 'center'}}>
           <TouchableOpacity onPress={handleHelpPress} style={styles.helpLink}>
-              <Text style={{fontSize: 30, color: "blue"}}>Visualize!</Text>
+              <Text style={styles.button3}>Visualize</Text>
           </TouchableOpacity>
         </View>
   
@@ -591,7 +575,7 @@ const styles = StyleSheet.create({
 
   contentContainer: {
 
-    paddingTop: 30
+    paddingTop: 0
 
   },
 
@@ -599,21 +583,21 @@ const styles = StyleSheet.create({
 
     alignItems: "center",
 
-    marginTop: 10,
+    marginTop: 0,
 
-    marginBottom: 20
+    marginBottom: 0
 
   },
 
   welcomeImage: {
 
-    width: 100,
+    width: 200,
 
-    height: 80,
+    height: 160,
 
     resizeMode: "contain",
 
-    marginTop: 3,
+    marginTop: 0,
 
     marginLeft: -10
 
@@ -641,11 +625,48 @@ const styles = StyleSheet.create({
 
   },
 
+  button: {
+    backgroundColor: 'lightskyblue',
+    borderColor: 'black',
+    borderWidth: 1,
+    borderRadius: 10,
+    color: 'white',
+    fontSize: 20,
+    fontWeight: '400',
+    overflow: 'hidden',
+    padding: 8,
+    textAlign:'center',
+  },
 
+  button2: {
+    backgroundColor: 'lightsalmon',
+    borderColor: 'black',
+    borderWidth: 1,
+    borderRadius: 10,
+    color: 'black',
+    fontSize: 20,
+    fontWeight: '400',
+    overflow: 'hidden',
+    padding: 8,
+    textAlign:'center',
+  },
+
+  button3: {
+    backgroundColor: 'lightsalmon',
+    borderColor: 'black',
+    borderWidth: 1,
+    borderRadius: 10,
+    color: 'black',
+    fontSize: 20,
+    fontWeight: '400',
+    overflow: 'hidden',
+    padding: 8,
+    textAlign:'center',
+  },
 
   helpContainer: {
 
-    marginTop: 15,
+    marginTop: 0,
 
     alignItems: "center"
 

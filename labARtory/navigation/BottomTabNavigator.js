@@ -4,6 +4,7 @@ import * as React from 'react';
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
+import { Fontisto } from '@expo/vector-icons'; 
 
 const BottomTab = createBottomTabNavigator();
 const INITIAL_ROUTE_NAME = 'Home';
@@ -20,16 +21,17 @@ export default function BottomTabNavigator({ navigation, route }) {
         name="Links"
         component={LinksScreen}
         options={{
-          title: 'Text Recognition',
-          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-book" />,
+          title: 'Virtual Lab',
+          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="ios-nuclear" />,
+
         }}
       />
       <BottomTab.Screen
         name="home"
         component={HomeScreen}
         options={{
-          title: 'Augmented Reality',
-          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-code-working" />,
+          title: 'Get Started',
+          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-book" />,
         }}
       />
     </BottomTab.Navigator>
@@ -41,8 +43,22 @@ function getHeaderTitle(route) {
 
   switch (routeName) {
     case 'Home':
-      return 'Augmented Reality';
+      return 'LabArtory';
     case 'Links':
-      return 'Text Recognition';
+      return 'LabArtory';
   }
 }
+
+/*
+<BottomTab.Screen
+        name="home"
+        component={HomeScreen}
+        options={{
+          title: 'Augmented Reality',
+          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-code-working" />,
+        }}
+      />
+
+
+
+*/ 
